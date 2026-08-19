@@ -1,0 +1,93 @@
+name: Portable application release
+
+on:
+  workflow_call:
+    inputs:
+      runner:
+        type: string
+        default: windows-2025-vs2026
+      configure-preset:
+        type: string
+        required: true
+      configure-args:
+        type: string
+        default: ''
+      build-preset:
+        type: string
+        required: true
+      test-preset:
+        type: string
+        required: true
+      build-directory:
+        type: string
+        required: true
+      artifact-slug:
+        type: string
+        required: true
+      release-title:
+        type: string
+        required: true
+      component:
+        type: string
+        default: Application
+      package-mode:
+        type: string
+        default: install
+      cpack-glob:
+        type: string
+        default: ''
+
+permissions:
+  contents: write
+  id-token: write
+  attestations: write
+
+jobs:
+  release:
+    runs-on: ${{ inputs.runner }}
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+      - name: Configure
+        shell: pwsh
+        run: |
+          $extra = @('${{ inputs.configure-args }}'.Split(' ', [System.StringSplitOptions]::RemoveEmptyEntries))
+          & cmake --preset '${{ inputs.configure-preset }}' @extra
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+      - name: Build
+        run: cmake --build --preset ${{ inputs.build-preset }} --parallel 2
+      - name: Test
+        run: ctest --preset ${{ inputs.test-preset }}
+      - name: Stage Portable package
+        shell: pwsh
+        run: |
+          $archive = '${{ inputs.artifact-slug }}-' + $env:GITHUB_REF_NAME + '-windows-x64-portable.zip'
+          if ('${{ inputs.package-mode }}' -eq 'cpack') {
+            cmake --build --preset '${{ inputs.build-preset }}' --target package
+            if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+            $source = Get-ChildItem '${{ inputs.cpack-glob }}' | Select-Object -First 1
+            if (-not $source) { throw 'CPack did not produce the expected ZIP' }
+            Copy-Item -LiteralPath $source.FullName -Destination $archive
+          } else {
+            cmake --install '${{ inputs.build-directory }}' --config Release --prefix package --component '${{ inputs.component }}'
+            if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+            Compress-Archive -Path package/* -DestinationPath $archive
+          }
+          $hash = (Get-FileHash $archive -Algorithm SHA256).Hash.ToLowerInvariant()
+          "$hash  $archive" | Set-Content "$archive.sha256" -Encoding ascii
+          "MWFL_PORTABLE_ARCHIVE=$archive" | Out-File $env:GITHUB_ENV -Append
+      - name: Attest Portable package
+        uses: actions/attest-build-provenance@e8998f949152b193b063cb0ec769d69d929409be
+        with:
+          subject-path: ${{ env.MWFL_PORTABLE_ARCHIVE }}
+      - name: Publish GitHub Release
+        shell: pwsh
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          $arguments = @('release', 'create', $env:GITHUB_REF_NAME,
+            $env:MWFL_PORTABLE_ARCHIVE, "$env:MWFL_PORTABLE_ARCHIVE.sha256",
+            '--repo', $env:GITHUB_REPOSITORY, '--verify-tag', '--generate-notes',
+            '--title', '${{ inputs.release-title }} ' + $env:GITHUB_REF_NAME)
+          if ($env:GITHUB_REF_NAME -match '-') { $arguments += '--prerelease' }
+          & gh @arguments
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
