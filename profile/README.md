@@ -27,28 +27,9 @@ is designed for you.
 - **Complete:** UI plus Process, IPC, Service, Diagnostics, Security, Deployment, and Scheduler components.
 - **Agent-friendly:** focused headers, explicit CMake targets, small examples, self-tests, and no generated UI files or hidden framework lifecycle.
 
-```mermaid
-flowchart TB
-    APP[Windows applications<br/>GUI · CLI · Service · Worker]
-
-    subgraph MWFL[MWFL · independently linked C++20 components]
-        UI[UI<br/>Controls · Layout · Events · DPI]
-        DESKTOP[Desktop<br/>Shell · Documents · Printing · Graphics]
-        FOUNDATION[Foundation<br/>Process · IPC · Service · Diagnostics]
-        SYSTEM[System<br/>Security · Deployment · Scheduler]
-    end
-
-    WIN[Windows 10+ APIs<br/>HWND · COM · SCM · ETW · DPAPI · Named Pipes · Job Objects]
-
-    APP --> UI
-    APP --> DESKTOP
-    APP --> FOUNDATION
-    APP --> SYSTEM
-    UI --> WIN
-    DESKTOP --> WIN
-    FOUNDATION --> WIN
-    SYSTEM --> WIN
-```
+<p align="center">
+  <img width="100%" src="https://raw.githubusercontent.com/mwfl/.github/main/profile/assets/mwfl-architecture.svg" alt="MWFL architecture: Windows applications use independently linked UI, Desktop, Foundation, and System components over native Windows APIs">
+</p>
 
 ## Native UI in ordinary C++
 
