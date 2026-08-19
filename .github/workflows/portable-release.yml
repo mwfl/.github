@@ -17,7 +17,7 @@ on:
         required: true
       test-preset:
         type: string
-        required: true
+        default: ''
       build-directory:
         type: string
         required: true
@@ -56,7 +56,14 @@ jobs:
       - name: Build
         run: cmake --build --preset ${{ inputs.build-preset }} --parallel 2
       - name: Test
-        run: ctest --preset ${{ inputs.test-preset }}
+        shell: pwsh
+        run: |
+          if ('${{ inputs.test-preset }}') {
+            & ctest --preset '${{ inputs.test-preset }}'
+          } else {
+            & ctest --test-dir '${{ inputs.build-directory }}' -C Release --output-on-failure
+          }
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
       - name: Stage Portable package
         shell: pwsh
         run: |
