@@ -76,16 +76,16 @@ These local-first applications are useful tools and real-world validation for
 the library. Each public Release provides a Windows x64 Portable ZIP—download,
 extract, and run.
 
-| Application | Purpose | Portable |
-|---|---|---|
-| [Folder Compare](https://github.com/mwfl/folder-compare) | Compare files and folders locally | [Download](https://github.com/mwfl/folder-compare/releases/download/v0.1.0/folder-compare-v0.1.0-windows-x64-portable.zip) |
-| [Folder Explorer](https://github.com/mwfl/folder-explorer) | Inventory folders and inspect PE files | [Download](https://github.com/mwfl/folder-explorer/releases/download/v0.1.1/folder-explorer-v0.1.1-windows-x64-portable.zip) |
-| [Hex Editor](https://github.com/mwfl/hex-editor) | Inspect and safely edit binary files | [Download](https://github.com/mwfl/hex-editor/releases/download/v0.1.2/hex-editor-v0.1.2-windows-x64-portable.zip) |
-| [Markdown Editor](https://github.com/mwfl/markdown-editor) | Edit Markdown with offline preview | [Download](https://github.com/mwfl/markdown-editor/releases/download/v0.1.0/markdown-editor-v0.1.0-windows-x64-portable.zip) |
-| [Notepad Colon](https://github.com/mwfl/notepad-colon) | Edit text and source code | [Download](https://github.com/mwfl/notepad-colon/releases/download/v0.1.0/notepad-colon-v0.1.0-windows-x64-portable.zip) |
-| [PDF Reader](https://github.com/mwfl/pdf-reader) | Read local PDF documents in tabs | [Download](https://github.com/mwfl/pdf-reader/releases/download/v0.1.0/pdf-reader-v0.1.0-windows-x64-portable.zip) |
-| [SQLite Viewer](https://github.com/mwfl/sqlite-viewer) | Browse SQLite databases read-only | [Download](https://github.com/mwfl/sqlite-viewer/releases/download/v0.1.0/sqlite-viewer-v0.1.0-windows-x64-portable.zip) |
-| [Startup Manager](https://github.com/mwfl/startup-manager) | Safely manage Windows startup entries | [Download](https://github.com/mwfl/startup-manager/releases/download/v0.1.1/startup-manager-v0.1.1-windows-x64-portable.zip) |
+| Application | Purpose | Screenshot | Portable |
+|---|---|---|---|
+| [Folder Compare](https://github.com/mwfl/folder-compare) | Compare files and folders locally | <img src="https://raw.githubusercontent.com/mwfl/folder-compare/main/docs/folder-compare.png" width="220" alt="Folder Compare screenshot"> | [Download](https://github.com/mwfl/folder-compare/releases/download/v0.1.0/folder-compare-v0.1.0-windows-x64-portable.zip) |
+| [Folder Explorer](https://github.com/mwfl/folder-explorer) | Inventory folders and inspect PE files | <img src="https://raw.githubusercontent.com/mwfl/folder-explorer/main/docs/folder-explorer.png" width="220" alt="Folder Explorer screenshot"> | [Download](https://github.com/mwfl/folder-explorer/releases/download/v0.1.1/folder-explorer-v0.1.1-windows-x64-portable.zip) |
+| [Hex Editor](https://github.com/mwfl/hex-editor) | Inspect and safely edit binary files | <img src="https://raw.githubusercontent.com/mwfl/hex-editor/main/docs/images/hex-editor.jpg" width="220" alt="Hex Editor screenshot"> | [Download](https://github.com/mwfl/hex-editor/releases/download/v0.1.2/hex-editor-v0.1.2-windows-x64-portable.zip) |
+| [Markdown Editor](https://github.com/mwfl/markdown-editor) | Edit Markdown with offline preview | <img src="https://raw.githubusercontent.com/mwfl/markdown-editor/main/docs/markdown-editor.png" width="220" alt="Markdown Editor screenshot"> | [Download](https://github.com/mwfl/markdown-editor/releases/download/v0.1.0/markdown-editor-v0.1.0-windows-x64-portable.zip) |
+| [Notepad Colon](https://github.com/mwfl/notepad-colon) | Edit text and source code | <img src="https://raw.githubusercontent.com/mwfl/.github/main/profile/assets/notepad-colon.jpg" width="220" alt="Notepad Colon screenshot"> | [Download](https://github.com/mwfl/notepad-colon/releases/download/v0.1.0/notepad-colon-v0.1.0-windows-x64-portable.zip) |
+| [PDF Reader](https://github.com/mwfl/pdf-reader) | Read local PDF documents in tabs | <img src="https://raw.githubusercontent.com/mwfl/pdf-reader/main/docs/pdf-reader.png" width="220" alt="PDF Reader screenshot"> | [Download](https://github.com/mwfl/pdf-reader/releases/download/v0.1.0/pdf-reader-v0.1.0-windows-x64-portable.zip) |
+| [SQLite Viewer](https://github.com/mwfl/sqlite-viewer) | Browse SQLite databases read-only | <img src="https://raw.githubusercontent.com/mwfl/sqlite-viewer/main/docs/sqlite-viewer.png" width="220" alt="SQLite Viewer screenshot"> | [Download](https://github.com/mwfl/sqlite-viewer/releases/download/v0.1.0/sqlite-viewer-v0.1.0-windows-x64-portable.zip) |
+| [Startup Manager](https://github.com/mwfl/startup-manager) | Safely manage Windows startup entries | <img src="https://raw.githubusercontent.com/mwfl/.github/main/profile/assets/startup-manager.jpg" width="220" alt="Startup Manager screenshot"> | [Download](https://github.com/mwfl/startup-manager/releases/download/v0.1.1/startup-manager-v0.1.1-windows-x64-portable.zip) |
 
 Start with the [MWFL repository](https://github.com/mwfl/mwfl), the
 [documentation](https://mwfl.github.io/), or the
