@@ -36,6 +36,9 @@ on:
       cpack-glob:
         type: string
         default: ''
+      release-tag:
+        type: string
+        default: ''
 
 permissions:
   contents: write
@@ -45,8 +48,12 @@ permissions:
 jobs:
   release:
     runs-on: ${{ inputs.runner }}
+    env:
+      MWFL_RELEASE_TAG: ${{ inputs.release-tag != '' && inputs.release-tag || github.ref_name }}
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          ref: ${{ env.MWFL_RELEASE_TAG }}
       - name: Configure
         shell: pwsh
         run: |
@@ -67,7 +74,7 @@ jobs:
       - name: Stage Portable package
         shell: pwsh
         run: |
-          $archive = '${{ inputs.artifact-slug }}-' + $env:GITHUB_REF_NAME + '-windows-x64-portable.zip'
+          $archive = '${{ inputs.artifact-slug }}-' + $env:MWFL_RELEASE_TAG + '-windows-x64-portable.zip'
           if ('${{ inputs.package-mode }}' -eq 'cpack') {
             cmake --build --preset '${{ inputs.build-preset }}' --target package
             if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
@@ -91,10 +98,15 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
-          $arguments = @('release', 'create', $env:GITHUB_REF_NAME,
-            $env:MWFL_PORTABLE_ARCHIVE, "$env:MWFL_PORTABLE_ARCHIVE.sha256",
-            '--repo', $env:GITHUB_REPOSITORY, '--verify-tag', '--generate-notes',
-            '--title', '${{ inputs.release-title }} ' + $env:GITHUB_REF_NAME)
-          if ($env:GITHUB_REF_NAME -match '-') { $arguments += '--prerelease' }
-          & gh @arguments
+          $assets = @($env:MWFL_PORTABLE_ARCHIVE, "$env:MWFL_PORTABLE_ARCHIVE.sha256")
+          gh release view $env:MWFL_RELEASE_TAG --repo $env:GITHUB_REPOSITORY *> $null
+          if ($LASTEXITCODE -eq 0) {
+            gh release upload $env:MWFL_RELEASE_TAG @assets --clobber --repo $env:GITHUB_REPOSITORY
+          } else {
+            $arguments = @('release', 'create', $env:MWFL_RELEASE_TAG) + $assets + @(
+              '--repo', $env:GITHUB_REPOSITORY, '--generate-notes',
+              '--title', '${{ inputs.release-title }} ' + $env:MWFL_RELEASE_TAG)
+            if ($env:MWFL_RELEASE_TAG -match '-') { $arguments += '--prerelease' }
+            & gh @arguments
+          }
           if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
