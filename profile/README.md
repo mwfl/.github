@@ -1,5 +1,5 @@
 <p align="center">
-  <a href="https://mwfl.github.io/">
+  <a href="https://github.com/mwfl/mwfl">
     <img src="https://raw.githubusercontent.com/mwfl/mwfl/main/docs/images/mwfl-mark.svg" width="96" alt="MWFL logo">
   </a>
 </p>
@@ -13,6 +13,7 @@
 </p>
 
 <p align="center">
+  <a href="https://github.com/mwfl/mwfl"><img src="https://img.shields.io/badge/source-mwfl%2Fmwfl-3949c9" alt="MWFL source repository"></a>
   <a href="https://mwfl.github.io/"><img src="https://img.shields.io/badge/docs-mwfl.github.io-146c94" alt="Documentation"></a>
   <a href="https://github.com/mwfl/mwfl/releases/latest"><img src="https://img.shields.io/github/v/release/mwfl/mwfl?label=mwfl" alt="Latest MWFL release"></a>
   <a href="https://github.com/mwfl/mwfl/blob/main/LICENSE"><img src="https://img.shields.io/badge/license-MIT-17a589" alt="MIT License"></a>
@@ -30,6 +31,17 @@ is designed for you.
 <p align="center">
   <img width="100%" src="https://raw.githubusercontent.com/mwfl/.github/main/profile/assets/mwfl-architecture.svg" alt="MWFL architecture: Windows applications use independently linked UI, Desktop, Foundation, and System components over native Windows APIs">
 </p>
+
+## [The MWFL library](https://github.com/mwfl/mwfl)
+
+[`mwfl/mwfl`](https://github.com/mwfl/mwfl) is the core open-source project
+behind this organization. Start there to add MWFL to a CMake application,
+browse the public API, or build the complete example suite.
+
+[**View the library and quick start →**](https://github.com/mwfl/mwfl) ·
+[Documentation](https://mwfl.github.io/) ·
+[Latest release](https://github.com/mwfl/mwfl/releases/latest) ·
+[62 compiled examples](https://github.com/mwfl/mwfl/tree/main/examples)
 
 ## Native UI in ordinary C++
 
